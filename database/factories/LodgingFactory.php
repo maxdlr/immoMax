@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Lodging;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Lodging>
+ */
+class LodgingFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'roomCount' => rand(1, 5),
+            'surface' => rand(50, 600),
+            'price' => rand(250000, 1000000),
+            'lodgingType' => LodgingTypeFactory::factoryForModel('LodgingType')
+        ];
+    }
+}
