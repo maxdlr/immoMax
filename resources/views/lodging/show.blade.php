@@ -2,7 +2,7 @@
 
 @section('title', $lodging->title)
 
-@section('body')
+@section('content')
     <!-- Header Section with Background Image -->
     <div class="bg-image text-white"
          style="background-image: url('https://via.placeholder.com/1200x400'); height: 400px; background-size: cover; background-position: center; position: relative;">
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="text-end">
-            <a href="{{ route('lodging_index') }}" class="btn btn-secondary">
+            <a href="{{ route('app_home') }}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Back to List
             </a>
         </div>

@@ -1,28 +1,37 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LodgingController;
+use App\Http\Controllers\LodgingTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Admin ---------------------------------------------------------------------------------------------------------------
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin_dashboard');
 
-// Lodging -------------------------------------
+// Lodging -----------------------------------------
 makeAdminCrudRoutes(LodgingController::class, 'lodging',
     ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
 );
 
-// User -------------------------------------
+// LodgingType -------------------------------------
+makeAdminCrudRoutes(LodgingTypeController::class, 'lodgingType',
+    ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
+);
+
+// User --------------------------------------------
 makeAdminCrudRoutes(UserController::class, 'user',
     ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
 );
 
 // Public ---------------------------------------------------------------------------------------------------------------
+Route::get('/', [HomeController::class, 'home'])->name('app_home');
 
-// Lodging -------------------------------------
+
+// Lodging ------------------------------------------
 makePublicRoutes(LodgingController::class, 'lodging',
-    ['index', 'show']
+    ['show']
 );
 
 // Route Factory --------------------------------------------------------------------------------------------------------

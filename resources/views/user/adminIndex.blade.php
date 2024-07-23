@@ -1,6 +1,7 @@
 @extends('admin/admin-base')
 
 @section('content')
+
     @include(
     'shared/_datatable',
     [
@@ -12,4 +13,5 @@
         'editRoute' => 'admin_user_edit',
         'deleteRoute' => 'admin_user_destroy',
     ])
+
 @endsection

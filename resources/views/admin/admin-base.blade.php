@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('body')
+@section('content')
     <main class="container">
         <div class="row">
             <section class="col-2">
