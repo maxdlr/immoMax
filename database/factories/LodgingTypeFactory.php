@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\LodgingType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LodgingType>
+ * @extends Factory<LodgingType>
  */
 class LodgingTypeFactory extends Factory
 {
@@ -17,7 +18,7 @@ class LodgingTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
         ];
     }
 }

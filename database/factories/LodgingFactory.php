@@ -23,7 +23,6 @@ class LodgingFactory extends Factory
             'roomCount' => rand(1, 5),
             'surface' => rand(50, 600),
             'price' => rand(250000, 1000000),
-            'lodgingType' => LodgingTypeFactory::factoryForModel('LodgingType')
         ];
     }
 }
