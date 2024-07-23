@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('content')
+@section('app_content')
     <h1>{{ $lodging->title }}</h1>
     <p>{{ $lodging->description }}</p>
     <p>Room Count: {{ $lodging->roomCount }}</p>

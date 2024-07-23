@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('content')
+@section('app_content')
     <h1>{{ $lodgingType->name }}</h1>
     <a href="{{ route('admin_lodgingType_edit', $lodgingType) }}">Edit</a>
     <form action="{{ route('admin_lodgingType_destroy', $lodgingType) }}" method="POST" style="display:inline;">

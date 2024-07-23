@@ -2,6 +2,6 @@
 <body>
 <main class="container">
     @include('shared/_navbar')
-    <section>@yield('content')</section>
+    <section>@yield('app_content')</section>
 </main>
 </body>

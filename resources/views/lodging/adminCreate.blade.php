@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('content')
+@section('app_content')
     <h1>Create Lodging</h1>
     <form action="{{ route('admin_lodging_store') }}" method="POST">
         @csrf

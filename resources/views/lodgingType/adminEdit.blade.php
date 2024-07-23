@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('content')
+@section('app_content')
     <h1>Edit LodgingType</h1>
     <form action="{{ route('admin_lodgingType_update', $lodgingType) }}" method="POST">
         @csrf
