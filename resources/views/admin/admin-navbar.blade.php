@@ -1,6 +1,26 @@
 @include(
 'shared/_button',
 [
+    'route' => route('app_home'),
+    'label' => 'site',
+    'colorClass' => 'primary',
+    'iconClass' => '',
+    'size' => 'lg'
+])
+
+@include(
+'shared/_button',
+[
+    'route' => route('admin_dashboard'),
+    'label' => 'dashboard',
+    'colorClass' => 'primary',
+    'iconClass' => '',
+    'size' => 'lg'
+])
+
+@include(
+'shared/_button',
+[
     'route' => route('admin_lodging_index'),
     'label' => 'lodgings',
     'colorClass' => 'primary',

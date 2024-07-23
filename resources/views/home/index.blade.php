@@ -1,12 +1,13 @@
 @extends('app')
 
-@section('title', 'Home Page')
+@section('title', 'Immo Max')
 
-@section('content')
+@section('app_content')
 
-    @include('lodging/index',
-    [
-        'lodgings' => $lodgings
-    ])
+    <header class="rounded-4 overflow-hidden my-5">
+        @include('shared/_header', ['title' => 'ImmoMax'])
+    </header>
+
+    @include('lodging/index', ['lodgings' => $lodgings])
 
 @endsection
