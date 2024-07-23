@@ -1,13 +1,23 @@
-@extends('app')
+@extends('admin/admin-base')
 
-@section('body')
+@section('content')
     @include('shared/_datatable', [
-    'title' => 'lodgings',
+    'title' => 'Lodgings',
     'items' => $lodgings,
-    'showDetail' => 'title',
+    'showDetail' =>
+        [
+            'title',
+            'description',
+            'roomCount',
+            'surface',
+            'price',
+            'lodgingType'
+        ],
     'newRoute' => 'admin_lodging_create',
     'showRoute' => 'admin_lodging_show',
     'editRoute' => 'admin_lodging_edit',
     'deleteRoute' => 'admin_lodging_destroy',
     ])
+
 @endsection
+
