@@ -2,6 +2,7 @@ default: help
 
 run: ## Start Project
 	@make composer-install && \
+	make npm-install && \
 	clear && \
 	make db && \
 	clear && \
@@ -16,6 +17,9 @@ start-server: ## Launch php server
 
 composer-install: ## Install composer dependencies
 	@composer install --no-interaction
+
+npm-install: ## Install npm packages
+	@npm install
 
 db: ## Reload database and fixtures
 	@make db-wipe && \
