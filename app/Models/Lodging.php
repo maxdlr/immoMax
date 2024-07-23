@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class Lodging extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 
     public static function migrate(): void
     {
@@ -21,6 +24,7 @@ class Lodging extends Model
             $table->tinyInteger('roomCount')->nullable(false);
             $table->integer('surface')->nullable(false);
             $table->float('price', 2)->nullable(false);
+            $table->foreignId('lodging_type_id');
             $table->timestamps();
         });
     }
@@ -32,7 +36,8 @@ class Lodging extends Model
             'description',
             'roomCount',
             'surface',
-            'price'
+            'price',
+            'lodging_type_id'
         ];
     }
 
@@ -44,11 +49,17 @@ class Lodging extends Model
             'roomCount' => 'required|integer',
             'surface' => 'required|integer',
             'price' => 'required|numeric',
+            'lodging_type_id' => 'required|exists:lodging_types,id',
         ];
     }
 
     public function lodgingType(): BelongsTo
     {
         return $this->belongsTo(LodgingType::class);
+    }
+
+    public function user(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }

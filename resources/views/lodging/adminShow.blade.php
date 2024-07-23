@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('body')
+@section('app_content')
     <h1>{{ $lodging->title }}</h1>
     <p>{{ $lodging->description }}</p>
     <p>Room Count: {{ $lodging->roomCount }}</p>
@@ -12,5 +12,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('lodging_index') }}">Back to List</a>
+    <a href="{{ route('admin_lodging_index') }}">Back to List</a>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lodging;
+use App\Models\LodgingType;
 use App\Service\ControllerSettings;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -36,7 +37,9 @@ class LodgingController extends Controller
 
     public function adminCreate(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('lodging.adminCreate');
+        $lodgingTypes = LodgingType::all();
+
+        return view('lodging.adminCreate', compact('lodgingTypes'));
     }
 
     public function adminStore(Request $request): RedirectResponse
@@ -47,7 +50,7 @@ class LodgingController extends Controller
             $lodging->$property = $request->input($property);
         }
         $lodging->save();
-        return redirect()->route('lodging.adminIndex')->with('success', 'Lodging created successfully.');
+        return redirect()->route('admin_lodging_index')->with('success', 'Lodging created successfully.');
     }
 
     public function adminShow(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
@@ -62,18 +65,14 @@ class LodgingController extends Controller
 
     public function adminEdit(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('lodging.adminEdit', compact('lodging'));
+        $lodgingTypes = LodgingType::all();
+
+        return view('lodging.adminEdit', compact('lodging', ['lodgingTypes']));
     }
 
     public function adminUpdate(Request $request, Lodging $lodging): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string',
-            'roomCount' => 'required|integer',
-            'surface' => 'required|integer',
-            'price' => 'required|numeric',
-        ]);
+        $validated = $request->validate($this->model::getPropertyFormValidation());
 
         $lodging->update($validated);
         return redirect()->route('admin_lodging_index')->with('success', 'Lodging updated successfully.');

@@ -1,19 +1,42 @@
 @extends('app')
 
-@section('body')
-    <h1>Create Lodging</h1>
-    <form action="{{ route('admin_lodging_store') }}" method="POST">
-        @csrf
-        <label>Title:</label>
-        <input type="text" name="title" required>
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
-        <label>Room Count:</label>
-        <input type="number" name="roomCount" required>
-        <label>Surface:</label>
-        <input type="number" name="surface" required>
-        <label>Price:</label>
-        <input type="number" step="0.01" name="price" required>
-        <button type="submit">Save</button>
-    </form>
+@section('app_content')
+    <div class="container mt-5">
+        <h1 class="mb-4">Create Lodging</h1>
+        <form action="{{ route('admin_lodging_store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="roomCount" class="form-label">Room Count</label>
+                <input type="number" class="form-control" id="roomCount" name="roomCount" required>
+            </div>
+            <div class="mb-3">
+                <label for="surface" class="form-label">Surface</label>
+                <input type="number" class="form-control" id="surface" name="surface" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" step="0.01" name="price" required>
+            </div>
+            <div class="mb-3">
+                <label for="lodging_type_id" class="form-label">Lodging Type</label>
+                <select class="form-select" id="lodging_type_id" name="lodging_type_id" required>
+                    @foreach($lodgingTypes as $lodgingType)
+                        <option value="{{ $lodgingType->id }}">{{ $lodgingType->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @include('shared/_button', [
+                            'label' => 'save',
+                            'colorClass' => 'primary',
+                            'iconClass' => 'floppy-fill'
+                        ])        </form>
+    </div>
 @endsection

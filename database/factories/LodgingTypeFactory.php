@@ -18,7 +18,7 @@ class LodgingTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->randomElement(['T1', 'T2', 'T3', 'T4']),
         ];
     }
 }

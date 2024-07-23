@@ -6,14 +6,14 @@ use App\Models\Lodging;
 use App\Models\LodgingType;
 use Illuminate\Contracts\View\View;
 
-class AdminController
+class HomeController
 {
-    public function dashboard(): View
+    public function home(): View
     {
         $lodgings = Lodging::all();
         $lodgingTypes = LodgingType::all();
 
-        return view('admin/dashboard', [
+        return view('home/index', [
             'lodgings' => $lodgings,
             'lodgingTypes' => $lodgingTypes,
         ]);

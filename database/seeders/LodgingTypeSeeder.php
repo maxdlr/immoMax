@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lodging;
 use App\Models\LodgingType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +14,6 @@ class LodgingTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('lodging_types')->insert(['name' => 'T1']);
-        DB::table('lodging_types')->insert(['name' => 'T2']);
-        DB::table('lodging_types')->insert(['name' => 'T3']);
-        DB::table('lodging_types')->insert(['name' => 'T4']);
+        LodgingType::factory()->count(4)->has(Lodging::factory()->count(2))->create();
     }
 }

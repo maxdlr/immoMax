@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\LodgingType;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,10 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        LodgingType::factory()->create(['name' => 'T1']);
+        LodgingType::factory()->create(['name' => 'T2']);
+        LodgingType::factory()->create(['name' => 'T3']);
+        LodgingType::factory()->create(['name' => 'T4']);
+
         $this->call([
             LodgingSeeder::class,
-            LodgingTypeSeeder::class,
             UserSeeder::class
         ]);
+
     }
 }
