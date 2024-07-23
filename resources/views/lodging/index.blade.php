@@ -4,7 +4,8 @@
     @foreach($lodgings as $lodging)
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="{{ $lodging->title }}">
+                <img src="{{ $lodging->media->first()->path }}" class="card-img-top"
+                     alt="{{ $lodging->media->first()->alt }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $lodging->title }}</h5>
                     <p class="card-text">{{ Str::limit($lodging->description) }}</p>

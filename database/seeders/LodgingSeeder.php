@@ -13,6 +13,10 @@ class LodgingSeeder extends Seeder
      */
     public function run(): void
     {
-        Lodging::factory()->count(30)->has(LodgingType::factory()->count(1))->create();
+        Lodging::factory()
+            ->count(30)
+            ->recycle(LodgingType::all()->shuffle()->first())
+            ->hasMedia(10)
+            ->create();
     }
 }

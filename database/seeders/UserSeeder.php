@@ -15,9 +15,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(10)
-            ->has(Lodging::factory()
-                ->count(rand(1, 10))
-            )
+            ->recycle(Lodging::all()->shuffle()->first())
             ->create();
     }
 }

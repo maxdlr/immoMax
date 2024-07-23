@@ -1,7 +1,7 @@
 @if(@isset($route))
     <a
         href="{{$route}}"
-        class="btn btn-{{$colorClass}} rounded-pill text-nowrap btn-{{$size}}"
+        class="btn btn-{{$colorClass}} rounded-pill text-nowrap btn-{{$size ?? ''}}"
     >
         <i class="bi bi-{{$iconClass}}"></i>
         {{ucfirst($label)}}

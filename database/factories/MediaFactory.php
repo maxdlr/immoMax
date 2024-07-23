@@ -4,14 +4,13 @@ namespace Database\Factories;
 
 use App\Models\Lodging;
 use App\Models\LodgingType;
-use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Lodging>
  */
-class LodgingFactory extends Factory
+class MediaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,13 +19,13 @@ class LodgingFactory extends Factory
      */
     public function definition(): array
     {
+        $seed = rand(1, 1000);
+
         return [
-            'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(),
-            'roomCount' => rand(1, 5),
-            'surface' => rand(50, 600),
-            'price' => rand(250000, 1000000),
-            'lodging_type_id' => LodgingType::all()->shuffle()->first()->id,
+            'path' => "https://picsum.photos/seed/$seed/1280/720",
+            'size' => $this->faker->randomNumber(3),
+            'alt' => $this->faker->sentence(3),
+            'lodging_id' => LodgingType::all()->shuffle()->first()->id,
         ];
     }
 }

@@ -2,35 +2,30 @@
 
 @section('title', $lodging->title)
 
-@section('content')
+@section('app_content')
     <!-- Header Section with Background Image -->
-    <div class="bg-image text-white"
-         style="background-image: url('https://via.placeholder.com/1200x400'); height: 400px; background-size: cover; background-position: center; position: relative;">
-        <div class="d-flex justify-content-center align-items-center h-100"
-             style="background-color: rgba(0, 0, 0, 0.5);">
-            <h1 class="display-4">{{ $lodging->title }}</h1>
-        </div>
-    </div>
+    @include('shared/_header', [
+        'imgUrl' => $lodging->media->first()->path,
+        'title' => $lodging->title
+    ])
 
     <!-- Gallery Section -->
     <div class="container my-4">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <img src="https://via.placeholder.com/400x300" class="img-fluid rounded" alt="Gallery Image">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="https://via.placeholder.com/400x300" class="img-fluid rounded" alt="Gallery Image">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="https://via.placeholder.com/400x300" class="img-fluid rounded" alt="Gallery Image">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="https://via.placeholder.com/400x300" class="img-fluid rounded" alt="Gallery Image">
-            </div>
+        <div
+            class="overflow-x-scroll"
+            style="white-space: nowrap;"
+        >
+            @foreach($lodging->media as $media)
+                <div class="d-inline">
+                    <img src="{{ $media->path }}" class="img-fluid rounded-4" alt="{{ $media->alt }}"
+                         style="max-width: 320px !important; height: auto !important;">
+                </div>
+            @endforeach
         </div>
     </div>
 
     <!-- Lodging Details Section -->
+
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-8">

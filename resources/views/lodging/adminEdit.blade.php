@@ -1,6 +1,6 @@
-@extends('app')
+@extends('admin/admin-base')
 
-@section('app_content')
+@section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Edit Lodging : {{$lodging->title}}</h1>
         <form action="{{ route('admin_lodging_update', $lodging) }}" method="POST">
@@ -41,6 +41,7 @@
                     @endforeach
                 </select>
             </div>
+            {{--            todo: add images--}}
             @include('shared/_button', [
                             'label' => 'save',
                             'colorClass' => 'primary',
