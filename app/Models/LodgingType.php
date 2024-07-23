@@ -12,6 +12,8 @@ class LodgingType extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public static function migrate(): void
     {
         Schema::create('lodging_types', function (Blueprint $table) {
@@ -19,6 +21,20 @@ class LodgingType extends Model
             $table->string('name')->nullable(false);
             $table->timestamps();
         });
+    }
+
+    public static function getProperties(): array
+    {
+        return [
+            'name'
+        ];
+    }
+
+    public static function getPropertyFormValidation(): array
+    {
+        return [
+            'name' => 'required|string|max:100',
+        ];
     }
 
     public function lodging(): HasMany

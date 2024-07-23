@@ -2,13 +2,16 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>{{ucfirst($title)}}</h1>
-    @include('shared/_button',[
-        'route' => route($newRoute),
-        'label' => 'new',
-        'colorClass' => 'primary',
-        'iconClass' => 'plus',
-        'size' => 'lg'
-    ])
+
+    @if(isset($newRoute))
+        @include('shared/_button',[
+            'route' => route($newRoute),
+            'label' => 'new',
+            'colorClass' => 'primary',
+            'iconClass' => 'plus',
+            'size' => 'lg'
+        ])
+    @endif
 </div>
 <table class="table table-hover align-middle">
     <tr>
@@ -21,7 +24,24 @@
         <tr>
             @foreach($showDetail as $detail)
                 @if($detail === 'lodgingType')
-                    <td>{{ Str::limit($item->$detail->name, 70) }}</td>
+                    <td>{{ Str::limit(
+                            $item->$detail ? $item->$detail->name : '-- empty --'
+                            , 70)
+                        }}</td>
+                @elseif($detail === 'lodging')
+                    <td>
+                        @foreach($item->$detail as $lodging)
+                            <span class="m-1">
+                                @include('shared/_button',[
+                                    'route' => route('admin_lodging_show', $lodging),
+                                    'label' => Str::limit($lodging->title, 5),
+                                    'colorClass' => 'info',
+                                    'iconClass' => 'eye',
+                                    'size' => 'sm'
+                                ])
+                            </span>
+                        @endforeach
+                    </td>
                 @else
                     <td>{{ Str::limit($item->$detail, 70) }}</td>
                 @endif

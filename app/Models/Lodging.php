@@ -13,6 +13,8 @@ class Lodging extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public static function migrate(): void
     {
         Schema::create('lodgings', function (Blueprint $table) {
@@ -34,7 +36,8 @@ class Lodging extends Model
             'description',
             'roomCount',
             'surface',
-            'price'
+            'price',
+            'lodging_type_id'
         ];
     }
 
@@ -46,6 +49,7 @@ class Lodging extends Model
             'roomCount' => 'required|integer',
             'surface' => 'required|integer',
             'price' => 'required|numeric',
+            'lodging_type_id' => 'required|exists:lodging_types,id',
         ];
     }
 

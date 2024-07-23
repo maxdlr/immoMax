@@ -40,7 +40,7 @@ function makeAdminCrudRoutes(string $controllerFqcn, string $model, array $route
 {
     foreach ($routes as $route) {
         $methods = match ($route) {
-            'index', 'create', 'edit', 'update' => ['GET', 'POST'],
+            'index', 'create', 'edit', 'update' => ['GET', 'POST', 'PUT'],
             'store' => ['POST'],
             'destroy' => ['DELETE'],
             default => ['GET']

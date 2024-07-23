@@ -41,7 +41,7 @@ class LodgingTypeController extends Controller
             $lodgingType->$property = $request->input($property);
         }
         $lodgingType->save();
-        return redirect()->route('lodgingType.adminIndex')->with('success', 'LodgingType created successfully.');
+        return redirect()->route('admin_lodgingType_index')->with('success', 'LodgingType created successfully.');
     }
 
     public function adminShow(LodgingType $lodgingType): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
@@ -56,9 +56,7 @@ class LodgingTypeController extends Controller
 
     public function adminUpdate(Request $request, LodgingType $lodgingType): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-        ]);
+        $validated = $request->validate($this->model::getPropertyFormValidation());
 
         $lodgingType->update($validated);
         return redirect()->route('admin_lodgingType_index')->with('success', 'LodgingType updated successfully.');

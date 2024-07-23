@@ -8,7 +8,7 @@
     </a>
 @else
     <button
-        class="btn btn-{{$colorClass}} rounded-pill text-nowrap btn-{{$size}}"
+        class="btn btn-{{$colorClass}} rounded-pill text-nowrap btn-{{$size ?? ''}}"
         type="{{$type ?? 'submit' }}"
     >
         <i class="bi bi-{{$iconClass}}"></i>

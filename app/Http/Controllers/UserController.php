@@ -22,12 +22,6 @@ class UserController extends Controller
         $this->model = $this->getModel();
     }
 
-    public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
-    {
-        $users = $this->model::all();
-        return view('user.index', compact('users'));
-    }
-
     public function adminIndex(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $users = $this->model::all();
@@ -63,21 +57,18 @@ class UserController extends Controller
     public function adminUpdate(Request $request, User $user): RedirectResponse
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'required|string',
-            'roomCount' => 'required|integer',
-            'surface' => 'required|integer',
-            'price' => 'required|numeric',
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|max:100',
         ]);
 
         $user->update($validated);
-        return redirect()->route('admin_user_adminIndex')->with('success', 'User updated successfully.');
+        return redirect()->route('admin_user_index')->with('success', 'User updated successfully.');
     }
 
     public function adminDestroy(User $user): RedirectResponse
     {
         $user->delete();
-        return redirect()->route('admin_user_adminIndex')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin_user_index')->with('success', 'User deleted successfully.');
     }
 
     private function getModel(): string

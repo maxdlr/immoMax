@@ -12,5 +12,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('lodging_index') }}">Back to List</a>
+    <a href="{{ route('admin_lodging_index') }}">Back to List</a>
 @endsection

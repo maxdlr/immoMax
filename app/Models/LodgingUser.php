@@ -13,6 +13,8 @@ class LodgingUser extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public static function migrate(): void
     {
         Schema::create('lodging_user', function (Blueprint $table) {
