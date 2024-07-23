@@ -47,3 +47,13 @@
     'iconClass' => '',
     'size' => 'lg'
 ])
+
+@include(
+'shared/_button',
+[
+    'route' => route('admin_media_index'),
+    'label' => 'media',
+    'colorClass' => 'primary',
+    'iconClass' => '',
+    'size' => 'lg'
+])

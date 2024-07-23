@@ -1,6 +1,6 @@
-@extends('app')
+@extends('admin/admin-base')
 
-@section('app_content')
+@section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Create Lodging Type</h1>
         <form action="{{ route('admin_lodgingType_store') }}" method="POST">

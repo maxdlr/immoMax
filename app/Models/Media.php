@@ -22,7 +22,7 @@ class Media extends Model
             $table->text('path')->nullable(false);
             $table->integer('size')->nullable(false);
             $table->text('alt');
-            $table->foreignId('lodging_id');
+            $table->foreignId('lodging_id')->nullable();
             $table->timestamps();
         });
     }
