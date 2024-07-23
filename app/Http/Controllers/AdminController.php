@@ -15,7 +15,7 @@ class AdminController
 
         return view('admin/dashboard', [
             'lodgings' => $lodgings,
-            'lodgingTypes' => $lodgingTypes
+            'lodgingTypes' => $lodgingTypes,
         ]);
     }
 }

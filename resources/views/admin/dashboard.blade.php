@@ -1,5 +1,7 @@
 @extends('admin/admin-base')
 
 @section('content')
-    {{$lodgings}}
+    lodgings : {{$lodgings}}
+    --------------------------------------------------------
+    lodgingTypes : {{$lodgingTypes}}
 @endsection

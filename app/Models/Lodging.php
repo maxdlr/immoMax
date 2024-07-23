@@ -21,6 +21,7 @@ class Lodging extends Model
             $table->tinyInteger('roomCount')->nullable(false);
             $table->integer('surface')->nullable(false);
             $table->float('price', 2)->nullable(false);
+            $table->foreignId('lodging_type_id');
             $table->timestamps();
         });
     }
