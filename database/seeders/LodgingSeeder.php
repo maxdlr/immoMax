@@ -18,7 +18,7 @@ class LodgingSeeder extends Seeder
             ->count(30)
             ->recycle(LodgingType::all()->shuffle()->first())
             ->recycle(City::all()->shuffle()->first())
-            ->hasMedia(5)
+            ->hasMedia(5, ['type' => 'LODGING'])
             ->create();
     }
 }

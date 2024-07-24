@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         Role::factory()->create(['name' => 'ADMIN']);
         Role::factory()->create(['name' => 'USER']);
 
+        Media::factory()->create(['type' => null]);
+
         $this->call([
             LodgingSeeder::class,
             UserSeeder::class
