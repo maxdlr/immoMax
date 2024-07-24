@@ -33,6 +33,7 @@ makeAdminCrudRoutes(MediaController::class, 'media',
 
 // Public ---------------------------------------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'home'])->name('app_home');
+Route::match(['GET', 'POST'], '/filtered', [HomeController::class, 'filter'])->name('lodging_filter');
 
 
 // Lodging ------------------------------------------
