@@ -26,6 +26,7 @@ class Lodging extends Model
             $table->integer('surface')->nullable(false);
             $table->float('price', 2)->nullable(false);
             $table->foreignId('lodging_type_id');
+            $table->foreignId('city_id');
             $table->timestamps();
         });
     }
@@ -38,7 +39,8 @@ class Lodging extends Model
             'roomCount',
             'surface',
             'price',
-            'lodging_type_id'
+            'lodging_type_id',
+            'city_id'
         ];
     }
 
@@ -51,6 +53,7 @@ class Lodging extends Model
             'surface' => 'required|integer',
             'price' => 'required|numeric',
             'lodging_type_id' => 'required|exists:lodging_types,id',
+            'city_id' => 'required|exists:cities,id',
         ];
     }
 
@@ -62,6 +65,11 @@ class Lodging extends Model
     public function lodgingType(): BelongsTo
     {
         return $this->belongsTo(LodgingType::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function users(): BelongsToMany

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ class LodgingSeeder extends Seeder
         Lodging::factory()
             ->count(30)
             ->recycle(LodgingType::all()->shuffle()->first())
+            ->recycle(City::all()->shuffle()->first())
             ->hasMedia(5)
             ->create();
     }
