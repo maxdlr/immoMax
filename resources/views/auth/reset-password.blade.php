@@ -3,43 +3,54 @@
 @section('title', 'Reset Password')
 
 @section('app_content')
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+    <div class="container mt-5">
+        <h2 class="mb-4">Reset Password</h2>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <form method="POST" action="{{ route('password.store') }}">
+            @csrf
 
-        <!-- Email Address -->
-        <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus
-                   autocomplete="username">
-            @if ($errors->has('email'))
-                <span>{{ $errors->first('email') }}</span>
-            @endif
-        </div>
+            <!-- Password Reset Token -->
+            <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Password -->
-        <div>
-            <label for="password">Password</label>
-            <input id="password" type="password" name="password" required autocomplete="new-password">
-            @if ($errors->has('password'))
-                <span>{{ $errors->first('password') }}</span>
-            @endif
-        </div>
+            <!-- Email Address -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" name="email" class="form-control"
+                       value="{{ old('email', $request->email) }}" required autofocus autocomplete="username">
+                @if ($errors->has('email'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
+            </div>
 
-        <!-- Confirm Password -->
-        <div>
-            <label for="password_confirmation">Confirm Password</label>
-            <input id="password_confirmation" type="password" name="password_confirmation" required
-                   autocomplete="new-password">
-            @if ($errors->has('password_confirmation'))
-                <span>{{ $errors->first('password_confirmation') }}</span>
-            @endif
-        </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" name="password" class="form-control" required
+                       autocomplete="new-password">
+                @if ($errors->has('password'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+            </div>
 
-        <div>
-            <button type="submit">Reset Password</button>
-        </div>
-    </form>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" class="form-control"
+                       required autocomplete="new-password">
+                @if ($errors->has('password_confirmation'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('password_confirmation') }}
+                    </div>
+                @endif
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </div>
+        </form>
+    </div>
 @endsection

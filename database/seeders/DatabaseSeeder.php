@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lodging;
 use App\Models\LodgingType;
 
 use App\Models\Media;
@@ -25,7 +26,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         ]);
 
-        User::factory()->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
+        $lodgings = Lodging::all()->shuffle()->filter(function () {
+            return rand(1, 12) % 3 === 0;
+        });
 
+        User::factory()->hasAttached($lodgings)->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
     }
 }

@@ -3,49 +3,64 @@
 @section('title', 'Register')
 
 @section('app_content')
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <div class="container mt-5">
+        <h2 class="mb-4">Register</h2>
 
-        <!-- Name -->
-        <div>
-            <label for="name">Name</label>
-            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
-            @if ($errors->has('name'))
-                <span>{{ $errors->first('name') }}</span>
-            @endif
-        </div>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-        <!-- Email Address -->
-        <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
-            @if ($errors->has('email'))
-                <span>{{ $errors->first('email') }}</span>
-            @endif
-        </div>
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input id="name" type="text" name="name" class="form-control" value="{{ old('name') }}" required
+                       autofocus autocomplete="name">
+                @if ($errors->has('name'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('name') }}
+                    </div>
+                @endif
+            </div>
 
-        <!-- Password -->
-        <div>
-            <label for="password">Password</label>
-            <input id="password" type="password" name="password" required autocomplete="new-password">
-            @if ($errors->has('password'))
-                <span>{{ $errors->first('password') }}</span>
-            @endif
-        </div>
+            <!-- Email Address -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}" required
+                       autocomplete="username">
+                @if ($errors->has('email'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
+            </div>
 
-        <!-- Confirm Password -->
-        <div>
-            <label for="password_confirmation">Confirm Password</label>
-            <input id="password_confirmation" type="password" name="password_confirmation" required
-                   autocomplete="new-password">
-            @if ($errors->has('password_confirmation'))
-                <span>{{ $errors->first('password_confirmation') }}</span>
-            @endif
-        </div>
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" name="password" class="form-control" required
+                       autocomplete="new-password">
+                @if ($errors->has('password'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+            </div>
 
-        <div>
-            <a href="{{ route('login') }}">Already registered?</a>
-            <button type="submit">Register</button>
-        </div>
-    </form>
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" class="form-control"
+                       required autocomplete="new-password">
+                @if ($errors->has('password_confirmation'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('password_confirmation') }}
+                    </div>
+                @endif
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ route('login') }}" class="btn btn-link">Already registered?</a>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
 @endsection

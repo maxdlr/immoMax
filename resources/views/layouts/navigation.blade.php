@@ -1,111 +1,55 @@
-<nav>
-    <!-- Primary Navigation Menu -->
-    <div>
-        <div style="display: flex; justify-content: space-between; height: 4rem;">
-            <div style="display: flex;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Logo and Navigation Links -->
+        <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <x-application-logo class="h-9"/>
+        </a>
 
-                <!-- Navigation Links -->
-                <div>
-                    <a href="{{ route('dashboard') }}"
-                       style="{{ request()->routeIs('dashboard') ? 'font-weight: bold;' : '' }}">
+        <!-- Toggler for mobile menu -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Navigation Links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                       href="{{ route('dashboard') }}">
                         Dashboard
                     </a>
-                </div>
-            </div>
+                </li>
+            </ul>
 
             <!-- Settings Dropdown -->
-            <div style="display: flex; align-items: center;">
-                <div>
-                    <button onclick="toggleDropdown()" style="border: none; background: none;">
-                        <span>{{ Auth::user()->name }}</span>
-                        <svg style="width: 1rem; height: 1rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"/>
-                        </svg>
-                    </button>
-
-                    <div id="dropdown" style="display: none; position: absolute; right: 0;">
-                        <a href="{{ route('profile.edit') }}">
-                            Profile
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); this.closest('form').submit();">
-                                Log Out
-                            </a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hamburger -->
-            <div>
-                <button onclick="toggleMobileMenu()" style="border: none; background: none;">
-                    <svg id="hamburger-icon" style="width: 1.5rem; height: 1.5rem;" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                        <path d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                    <svg id="close-icon" style="display: none; width: 1.5rem; height: 1.5rem;"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div id="mobile-menu" style="display: none;">
-        <div>
-            <a href="{{ route('dashboard') }}"
-               style="{{ request()->routeIs('dashboard') ? 'font-weight: bold;' : '' }}">
-                Dashboard
-            </a>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div>
-            <div>
-                <div>{{ Auth::user()->name }}</div>
-                <div>{{ Auth::user()->email }}</div>
-            </div>
-
-            <div>
-                <a href="{{ route('profile.edit') }}">
-                    Profile
-                </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                        Log Out
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
                     </a>
-                </form>
-            </div>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Log Out</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 
-<script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdown');
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const hamburgerIcon = document.getElementById('hamburger-icon');
-        const closeIcon = document.getElementById('close-icon');
-
-        if (mobileMenu.style.display === 'none') {
-            mobileMenu.style.display = 'block';
-            hamburgerIcon.style.display = 'none';
-            closeIcon.style.display = 'block';
-        } else {
-            mobileMenu.style.display = 'none';
-            hamburgerIcon.style.display = 'block';
-            closeIcon.style.display = 'none';
-        }
-    }
-</script>
+<!-- Optional: Add this if you need Bootstrap JavaScript functionality -->
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz4fnFO9Kek3uGJzXzR+N6j6NXG+XWgF0A8t9J0UR5PSdF11e5pm4HGw9m"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cn7l7gDp0eyniUUKwaJ0Jsh1RfrrZnOMmOi0IQa2l8knTg06g7ka6D32tylK8cW1"
+            crossorigin="anonymous"></script>
+@endsection
