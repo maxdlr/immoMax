@@ -14,6 +14,6 @@ class LodgingTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        LodgingType::factory()->count(4)->has(Lodging::factory()->count(2))->create();
+        LodgingType::factory()->count(4)->create();
     }
 }

@@ -13,11 +13,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->count(10)
-            ->has(Lodging::factory()
-                ->count(rand(1, 10))
-            )
-            ->create();
+        for ($i = 0; $i < 10; $i++) {
+            $lodgings = Lodging::all()->shuffle()->filter(function () {
+                return rand(1, 12) % 3 === 0;
+            });
+
+            User::factory()->hasAttached($lodgings)->create();
+        }
     }
 }

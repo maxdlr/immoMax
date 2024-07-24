@@ -4,9 +4,9 @@
 
 @section('app_content')
 
-    <header class="rounded-4 overflow-hidden my-5">
-        @include('shared/_header', ['title' => 'ImmoMax'])
-    </header>
+    @include('shared/_header', ['title' => 'ImmoMax', 'imgUrl' => $headerMedia?->path])
+
+    @include('home/_filters')
 
     @include('lodging/index', ['lodgings' => $lodgings])
 

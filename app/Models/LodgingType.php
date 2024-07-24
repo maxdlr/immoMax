@@ -37,7 +37,7 @@ class LodgingType extends Model
         ];
     }
 
-    public function lodging(): HasMany
+    public function lodgings(): HasMany
     {
         return $this->hasMany(Lodging::class);
     }

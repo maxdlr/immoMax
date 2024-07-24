@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LodgingController;
 use App\Http\Controllers\LodgingTypeController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +26,14 @@ makeAdminCrudRoutes(UserController::class, 'user',
     ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
 );
 
+// User --------------------------------------------
+makeAdminCrudRoutes(MediaController::class, 'media',
+    ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
+);
+
 // Public ---------------------------------------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'home'])->name('app_home');
+Route::match(['GET', 'POST'], '/filtered', [HomeController::class, 'filter'])->name('lodging_filter');
 
 
 // Lodging ------------------------------------------
@@ -40,7 +47,8 @@ function makeAdminCrudRoutes(string $controllerFqcn, string $model, array $route
 {
     foreach ($routes as $route) {
         $methods = match ($route) {
-            'index', 'create', 'edit', 'update' => ['GET', 'POST', 'PUT'],
+            'index', 'create', 'edit' => ['GET', 'POST', 'PUT'],
+            'update' => ['PUT'],
             'store' => ['POST'],
             'destroy' => ['DELETE'],
             default => ['GET']

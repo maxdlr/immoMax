@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 class="mb-4">Edit Lodging Type</h1>
-        <form action="{{ route('admin_lodgingType_update', $lodgingType) }}" method="POST">
+        <h1 class="mb-4">Edit Media</h1>
+        <img src="{{ $media->path }}" alt="{{ $media->alt }}" class="img-fluid mb-3 rounded-4">
+        <form action="{{ route('admin_media_update', $media) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $lodgingType->name }}" required>
-            </div>
+
+            @include('shared/_upload-input')
+
             @include('shared/_button', [
                             'label' => 'save',
                             'colorClass' => 'primary',
