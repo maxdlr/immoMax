@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LodgingController;
 use App\Http\Controllers\LodgingTypeController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,18 @@ makeAdminCrudRoutes(UserController::class, 'user',
 makeAdminCrudRoutes(MediaController::class, 'media',
     ['index', 'create', 'store', 'edit', 'update', 'show', 'destroy']
 );
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
 
 // Public ---------------------------------------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'home'])->name('app_home');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\LodgingType;
 
 use App\Models\Media;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,8 @@ class DatabaseSeeder extends Seeder
             LodgingSeeder::class,
             UserSeeder::class
         ]);
+
+        User::factory()->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
 
     }
 }
