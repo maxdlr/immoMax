@@ -19,7 +19,7 @@ class MediaFactory extends Factory
      */
     public function definition(): array
     {
-        $seed = rand(1, 1000);
+        $seed = rand(1, 2000);
 
         return [
             'path' => "https://picsum.photos/seed/$seed/1280/720",

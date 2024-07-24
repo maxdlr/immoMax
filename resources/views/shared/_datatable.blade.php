@@ -1,7 +1,7 @@
 @php use App\Models\Lodging;use Illuminate\Support\Collection;use Illuminate\Support\Str; @endphp
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>{{ucfirst($title)}}</h1>
+    <h1 class="display-4">{{ucfirst($title)}}</h1>
 
     @if(isset($newRoute))
         @include('shared/_button',[

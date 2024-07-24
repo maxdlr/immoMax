@@ -7,9 +7,10 @@
      background-position: center;
      position: relative;"
     >
-        <div class="d-flex justify-content-center align-items-center h-100"
+        <div class="d-flex flex-column justify-content-center align-items-center h-100"
              style="background-color: rgba(0, 0, 0, 0.5);">
             <h1 class="display-4">{{ $title ?? ''}}</h1>
+            <p class="lead">Parce qu'habiter, c'est cool</p>
         </div>
     </div>
 </header>

@@ -27,6 +27,7 @@ class LodgingFactory extends Factory
             'surface' => rand(50, 600),
             'price' => rand(250000, 1000000),
             'lodging_type_id' => LodgingType::all()->shuffle()->first()->id,
+            'city_id' => LodgingType::all()->shuffle()->first()->id,
         ];
     }
 }

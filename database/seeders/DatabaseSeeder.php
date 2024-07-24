@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 
@@ -22,8 +23,15 @@ class DatabaseSeeder extends Seeder
         LodgingType::factory()->create(['name' => 'T3']);
         LodgingType::factory()->create(['name' => 'T4']);
 
+        City::factory()->create(['name' => 'PARIS']);
+        City::factory()->create(['name' => 'LYON']);
+        City::factory()->create(['name' => 'MARSEILLE']);
+        City::factory()->create(['name' => 'NANTES']);
+
         Role::factory()->create(['name' => 'ADMIN']);
         Role::factory()->create(['name' => 'USER']);
+
+        Media::factory()->create(['type' => null]);
 
         $this->call([
             LodgingSeeder::class,

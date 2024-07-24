@@ -29,8 +29,17 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-8">
-                <h2 class="mb-3">Description</h2>
-                <p>{{ $lodging->description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mb-3 display-4">Description</h2>
+
+                    
+                    {{--                    todo: implement add to favorite feature--}}
+
+
+
+                    @include('shared/_button', ['iconClass' => 'star-fill', 'colorClass' => 'warning', 'extraClasses' => 'text-white'])
+                </div>
+                <p class="fs-4">{{ $lodging->description }}</p>
             </div>
             <div class="col-md-4">
                 <ul class="list-group">
