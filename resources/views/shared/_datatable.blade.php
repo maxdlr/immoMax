@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Str; @endphp
+@php use App\Models\Lodging;use Illuminate\Support\Collection;use Illuminate\Support\Str; @endphp
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>{{ucfirst($title)}}</h1>
@@ -28,19 +28,32 @@
                             $item->$detail ? $item->$detail->name : '-- empty --'
                             , 70)
                         }}</td>
-                @elseif($detail === 'lodging')
+                @elseif($detail === 'lodging' || $detail === 'lodgings')
                     <td>
-                        @foreach($item->$detail as $lodging)
-                            <span class="m-1">
+                        @if(($item->$detail instanceof Collection && $item->$detail->isEmpty()) || null === $item->$detail)
+                            -- empty --
+                        @elseif($item->$detail instanceof Collection)
+                            @foreach($item->$detail as $lodging)
+                                <span class="m-1">
                                 @include('shared/_button',[
-                                    'route' => route('admin_lodging_show', $lodging),
+                                    'route' => route('admin_lodging_show', ['lodging' => $lodging]),
                                     'label' => Str::limit($lodging->title, 5),
                                     'colorClass' => 'info',
                                     'iconClass' => 'eye',
                                     'size' => 'sm'
                                 ])
                             </span>
-                        @endforeach
+                            @endforeach
+                        @else
+                            @php $lodging = $item->$detail instanceof Lodging ? $item->$detail : $item->$detail[0] @endphp
+                            @include('shared/_button',[
+                                'route' => route('admin_lodging_show', $lodging),
+                                'label' => Str::limit($lodging->title, 15),
+                                'colorClass' => 'info',
+                                'iconClass' => 'eye',
+                                'size' => 'sm'
+                            ])
+                        @endif
                     </td>
                 @else
                     <td>{{ Str::limit($item->$detail, 70) }}</td>

@@ -23,6 +23,7 @@ class Media extends Model
             $table->integer('size')->nullable(false);
             $table->text('alt');
             $table->foreignId('lodging_id')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +34,7 @@ class Media extends Model
             'path',
             'size',
             'alt',
+            'type',
         ];
     }
 
@@ -42,6 +44,8 @@ class Media extends Model
             'path' => 'required|string|max:1000',
             'size' => 'required|integer',
             'alt' => 'nullable|string|max:255',
+            'type' => 'required|string|max:100',
+
         ];
     }
 

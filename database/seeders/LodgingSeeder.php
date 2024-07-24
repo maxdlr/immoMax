@@ -16,7 +16,7 @@ class LodgingSeeder extends Seeder
         Lodging::factory()
             ->count(30)
             ->recycle(LodgingType::all()->shuffle()->first())
-            ->hasMedia(10)
+            ->hasMedia(5)
             ->create();
     }
 }

@@ -64,7 +64,7 @@ class Lodging extends Model
         return $this->belongsTo(LodgingType::class);
     }
 
-    public function user(): BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

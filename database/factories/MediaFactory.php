@@ -26,6 +26,7 @@ class MediaFactory extends Factory
             'size' => $this->faker->randomNumber(3),
             'alt' => $this->faker->sentence(3),
             'lodging_id' => LodgingType::all()->shuffle()->first()->id,
+            'type' => 'LODGING'
         ];
     }
 }

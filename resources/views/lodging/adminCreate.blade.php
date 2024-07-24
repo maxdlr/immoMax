@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Create Lodging</h1>
-        <form action="{{ route('admin_lodging_store') }}" method="POST">
+        <form action="{{ route('admin_lodging_store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -33,7 +33,9 @@
                     @endforeach
                 </select>
             </div>
-            {{--            todo: add images--}}
+
+            @include('shared/_upload-multiple-input')
+
             @include('shared/_button', [
                             'label' => 'save',
                             'colorClass' => 'primary',

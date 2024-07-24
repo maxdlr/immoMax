@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Lodging;
 use App\Models\LodgingType;
+use App\Models\Media;
 use App\Service\ControllerSettings;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Reflection;
 use ReflectionClass;
 
@@ -50,7 +52,28 @@ class LodgingController extends Controller
             $lodging->$property = $request->input($property);
         }
         $lodging->save();
-        return redirect()->route('admin_lodging_index')->with('success', 'Lodging created successfully.');
+
+        if ($request->hasFile('medias')) {
+            $uploadedMedias = $request->file('medias');
+
+            foreach ($uploadedMedias as $uploadedMedia) {
+                if ($uploadedMedia->isValid()) {
+                    $newPath = $uploadedMedia->store('public/images');
+                    $newSize = $uploadedMedia->getSize();
+                    $newAlt = 'image of lodging ' . $lodging->title;
+
+                    $media = new Media();
+                    $media->path = Storage::url($newPath);
+                    $media->size = $newSize;
+                    $media->alt = $newAlt;
+                    $media->type = 'LODGING';
+                    $media->lodging()->associate($lodging);
+                    $media->save();
+                }
+            }
+        }
+
+        return redirect()->route('admin_lodging_show', $lodging)->with('success', 'Lodging created successfully.');
     }
 
     public function adminShow(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
