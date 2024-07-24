@@ -6,6 +6,7 @@ use App\Models\Lodging;
 use App\Models\LodgingType;
 
 use App\Models\Media;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,9 @@ class DatabaseSeeder extends Seeder
         LodgingType::factory()->create(['name' => 'T3']);
         LodgingType::factory()->create(['name' => 'T4']);
 
+        Role::factory()->create(['name' => 'ADMIN']);
+        Role::factory()->create(['name' => 'USER']);
+
         $this->call([
             LodgingSeeder::class,
             UserSeeder::class
@@ -30,6 +34,9 @@ class DatabaseSeeder extends Seeder
             return rand(1, 12) % 3 === 0;
         });
 
-        User::factory()->hasAttached($lodgings)->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
+        User::factory()
+            ->hasAttached($lodgings)
+            ->hasAttached(Role::where(['name' => 'ADMIN'])->get())
+            ->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
     }
 }
