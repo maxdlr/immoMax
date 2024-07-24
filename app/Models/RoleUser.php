@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LodgingUser extends Model
+class RoleUser extends Model
 {
     protected $guarded = [];
 
     public static function migrate(): void
     {
-        Schema::create('lodging_user', function (Blueprint $table) {
-            $table->foreignId('lodging_id');
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->foreignId('role_id');
             $table->foreignId('user_id');
         });
     }
