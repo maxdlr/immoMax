@@ -32,10 +32,9 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="mb-3 display-4">Description</h2>
 
-                    
+
                     {{--                    todo: implement add to favorite feature--}}
-
-
+                    
 
                     @include('shared/_button', ['iconClass' => 'star-fill', 'colorClass' => 'warning', 'extraClasses' => 'text-white'])
                 </div>
