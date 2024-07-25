@@ -7,13 +7,13 @@ use App\Models\Lodging;
 use App\Models\LodgingType;
 use App\Models\Media;
 use App\Service\ControllerSettings;
+use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Reflection;
 use ReflectionClass;
 
 #[ControllerSettings(model: Lodging::class)]
@@ -32,22 +32,34 @@ class LodgingController extends Controller
         return view('lodging.index', compact('lodgings'));
     }
 
-    public function adminIndex(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function adminIndex(): RedirectResponse|View
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
         $lodgings = $this->model::all();
         return view('lodging.adminIndex', compact('lodgings'));
     }
 
-    public function adminCreate(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function adminCreate(): RedirectResponse|View
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
+        $transactionTypes = City::all();
 
-        return view('lodging.adminCreate', compact('lodgingTypes', ['cities']));
+        return view('lodging.adminCreate', compact('lodgingTypes', ['cities', 'transactionTypes']));
     }
 
     public function adminStore(Request $request): RedirectResponse
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         $request->validate($this->model::getPropertyFormValidation());
         $lodging = new Lodging();
         foreach ($this->model::getProperties() as $property) {
@@ -60,8 +72,12 @@ class LodgingController extends Controller
         return redirect()->route('admin_lodging_show', $lodging)->with('success', 'Lodging created successfully.');
     }
 
-    public function adminShow(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function adminShow(Lodging $lodging): RedirectResponse|View
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         return view('lodging.adminShow', compact('lodging'));
     }
 
@@ -70,16 +86,25 @@ class LodgingController extends Controller
         return view('lodging.show', compact('lodging'));
     }
 
-    public function adminEdit(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function adminEdit(Lodging $lodging): RedirectResponse|View
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
+        $transactionTypes = City::all();
 
-        return view('lodging.adminEdit', compact('lodging', ['lodgingTypes', 'cities']));
+        return view('lodging.adminEdit', compact('lodging', ['lodgingTypes', 'cities', 'transactionTypes']));
     }
 
     public function adminUpdate(Request $request, Lodging $lodging): RedirectResponse
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         $validated = $request->validate($this->model::getPropertyFormValidation());
 
         $lodging->update($validated);
@@ -91,6 +116,14 @@ class LodgingController extends Controller
 
     public function adminDestroy(Lodging $lodging): RedirectResponse
     {
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
+        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
+        }
+
         $lodging->delete();
         return redirect()->route('admin_lodging_index')->with('success', 'Lodging deleted successfully.');
     }

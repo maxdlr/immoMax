@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Lodging;
+use App\Models\LodgingType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Lodging>
+ * @extends Factory<LodgingType>
  */
-class RoleFactory extends Factory
+class TransactionTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class RoleFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => '',
+            'name' => $this->faker->randomElement(['SELL', 'RENT']),
         ];
     }
 }

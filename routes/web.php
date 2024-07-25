@@ -47,6 +47,7 @@ require __DIR__ . '/auth.php';
 // Public ---------------------------------------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'home'])->name('app_home');
 Route::match(['GET', 'POST'], '/filtered', [HomeController::class, 'filter'])->name('lodging_filter');
+Route::get('/fav/{user}/{lodging}', [UserController::class, 'addLodgingToFavorites'])->name('app_add_lodging_to_favorites');
 
 
 // Lodging ------------------------------------------

@@ -2,11 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enum\LodgingDescriptionEnum;
+use App\Enum\LodgingTitleEnum;
+use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
-use App\Models\Media;
+use App\Models\TransactionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Lodging>
@@ -20,14 +22,20 @@ class LodgingFactory extends Factory
      */
     public function definition(): array
     {
+        $description = '';
+        for ($i = 0; $i < 30; $i++) {
+            $description .= $this->faker->randomElement(LodgingDescriptionEnum::cases())->value;
+        }
+        
         return [
-            'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(30),
+            'title' => $this->faker->randomElement(LodgingTitleEnum::cases())->value,
+            'description' => $description,
             'roomCount' => rand(1, 5),
             'surface' => rand(50, 600),
             'price' => rand(250000, 1000000),
             'lodging_type_id' => LodgingType::all()->shuffle()->first()->id,
-            'city_id' => LodgingType::all()->shuffle()->first()->id,
+            'city_id' => City::all()->shuffle()->first()->id,
+            'transaction_type_id' => TransactionType::all()->shuffle()->first()->id,
         ];
     }
 }

@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Lodging>

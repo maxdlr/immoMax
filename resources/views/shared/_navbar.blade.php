@@ -44,7 +44,8 @@
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-                <a class="nav-link fw-bold text-primary mx-3 dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                <a class="nav-link fw-bold text-primary mx-3 dropdown-toggle rounded-pill" href="#" id="navbarDropdown"
+                   role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-fill"></i>
                     {{ \Illuminate\Support\Str::title(Auth::user()->name) }}

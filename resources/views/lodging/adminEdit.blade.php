@@ -54,6 +54,17 @@
                     @endforeach
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="transaction_type_id" class="form-label">City</label>
+                <select class="form-select" id="transaction_type_id" name="transaction_type_id" required>
+                    @foreach($transactionTypes as $transactionType)
+                        <option
+                            value="{{ $transactionType->id }}" {{ $transactionType->id == $lodging->lodging_type_id ? 'selected' : '' }}>
+                            {{ $transactionType->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             @include('shared/_upload-input')
         </form>
 

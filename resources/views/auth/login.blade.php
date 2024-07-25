@@ -4,18 +4,22 @@
 
 @section('app_content')
     <div class="container mt-5">
-        <!-- Session Status -->
+
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif
+        <div class="text-center my-5">
+            <span class="lead text-nowrap">Si t'es mon prof, connecte toi avec 'prof@prof.prof' et 'password'</span>
+        </div>
+
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div class="w-25 mx-auto">
-                <!-- Email Address -->
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
@@ -25,7 +29,6 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input id="password" type="password" class="form-control" name="password" required
@@ -35,7 +38,6 @@
                     @enderror
                 </div>
 
-                <!-- Remember Me -->
                 <div class="mb-3 form-check">
                     <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
                     <label for="remember_me" class="form-check-label">Remember me</label>

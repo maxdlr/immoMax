@@ -32,12 +32,37 @@
                     </div>
                 @endif
                 <p class="card-text py-3 lead">{{ $lodging->description }}</p>
-                <p class="card-text"><strong>Room Count:</strong> <span
-                        class="badge bg-secondary">{{ $lodging->roomCount }}</span></p>
-                <p class="card-text"><strong>Surface:</strong> <span class="badge bg-secondary">{{ $lodging->surface }} m²</span>
-                </p>
-                <p class="card-text"><strong>Price:</strong> <span
-                        class="badge bg-secondary">${{ $lodging->price }}</span></p>
+
+                <ul class="list-group w-50 mx-auto mb-4">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-house-door"></i> Rooms
+                        <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->roomCount }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-rulers"></i> Surface
+                        <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->surface }} m²</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-currency-dollar"></i> Price
+                        <span class="badge fs-6 bg-primary rounded-pill">${{ $lodging->price }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-tag-fill"></i> Type
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->lodgingType()->get()->first()->name }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-bag"></i> Transaction Type
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->transactionType()->get()->first()->name }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-geo-alt-fill"></i> City
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->city()->get()->first()->name }}</span>
+                    </li>
+                </ul>
+
 
                 @include('shared/_button',
                     [
@@ -64,6 +89,14 @@
                     'colorClass' => 'secondary',
                     'label' => 'Back to list',
                     'iconClass' => 'arrow-left'
+                ])
+
+                @include('shared/_button',
+                [
+                    'route' => route('lodging_show', $lodging),
+                    'colorClass' => 'outline-secondary',
+                    'label' => 'See as client',
+                    'iconClass' => 'eye'
                 ])
 
             </div>

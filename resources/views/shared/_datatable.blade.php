@@ -103,6 +103,16 @@
                         </span>
 
                     </td>
+                @elseif($item instanceof \App\Models\Media)
+                    <td class="w-25">
+                        <div class="rounded-4 overflow-hidden">
+                            <img
+                                src="{{ $item->$detail }}"
+                                alt="{{ $item->$detail }}"
+                                class="img-fluid object-fit-contain"
+                            >
+                        </div>
+                    </td>
                 @else
                     <td>
                         @if (strlen($item->$detail) > 50)
