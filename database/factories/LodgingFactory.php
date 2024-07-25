@@ -22,7 +22,7 @@ class LodgingFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(30),
             'roomCount' => rand(1, 5),
             'surface' => rand(50, 600),
             'price' => rand(250000, 1000000),

@@ -1,4 +1,4 @@
-@extends('user-base')
+@extends('app')
 
 @section('title', 'Profile')
 

@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Edit ' . $lodgingType->name)
 
 @section('content')
     <div class="container mt-5">

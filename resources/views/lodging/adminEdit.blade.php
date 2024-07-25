@@ -1,9 +1,11 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Edit ' . $lodging->title)
 
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Edit Lodging : {{$lodging->title}}</h1>
-        <form action="{{ route('admin_lodging_update', $lodging) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin_lodging_update', $lodging) }}" method="POST" enctype="multipart/form-data"
+              id="editLodging">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -41,11 +43,52 @@
                     @endforeach
                 </select>
             </div>
-            {{--            todo: add images--}}
-            @include('shared/_button', [
-                            'label' => 'save',
-                            'colorClass' => 'primary',
-                            'iconClass' => 'floppy-fill'
-                        ])        </form>
+            <div class="mb-3">
+                <label for="city_id" class="form-label">City</label>
+                <select class="form-select" id="city_id" name="city_id" required>
+                    @foreach($cities as $city)
+                        <option
+                            value="{{ $city->id }}" {{ $city->id == $lodging->lodging_type_id ? 'selected' : '' }}>
+                            {{ $city->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            @include('shared/_upload-input')
+        </form>
+            
+        @if($lodging->media->isNotEmpty())
+            <div
+                class="d-flex justify-content-start align-items-center flex-wrap"
+            >
+                @foreach($lodging->media as $media)
+                    <div class="position-relative p-1">
+                        <img src="{{ $media->path }}" class="img-fluid rounded-4" alt="{{ $media->alt }}"
+                             style="max-width: 320px !important; height: auto !important;">
+                        <div class="position-absolute top-0 start-0 m-2">
+                            <form action="{{ route('admin_media_destroy', $media) }}" method="POST"
+                                  id="deleteMedia"
+                                  class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                @include('shared/_button',
+                                    [
+                                        'form' => 'deleteMedia',
+                                        'label' => 'delete',
+                                        'colorClass' => 'danger',
+                                        'iconClass' => 'trash-fill'
+                                    ])
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        @include('shared/_button', [
+                        'form' => 'editLodging',
+                        'label' => 'save',
+                        'colorClass' => 'primary',
+                        'iconClass' => 'floppy-fill'
+                    ])
     </div>
 @endsection

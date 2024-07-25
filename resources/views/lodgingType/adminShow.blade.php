@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - ' . $lodgingType->name)
 
 @section('content')
     <h1>{{ $lodgingType->name }}</h1>
@@ -8,5 +9,5 @@
         @method('DELETE')
         <button type="submit">Delete</button>
     </form>
-    <a href="{{ route('lodgingType_index') }}">Back to List</a>
+    <a href="{{ route('admin_lodgingType_index') }}">Back to List</a>
 @endsection

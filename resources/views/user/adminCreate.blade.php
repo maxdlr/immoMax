@@ -1,6 +1,7 @@
-@extends('app')
+@extends('admin/admin-base')
+@section('title', 'Admin - Create user')
 
-@section('app_content')
+@section('content')
     <h1>Create User</h1>
     <form action="{{ route('admin_user_store') }}" method="POST">
         @csrf

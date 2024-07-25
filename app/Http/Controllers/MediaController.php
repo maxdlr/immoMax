@@ -71,7 +71,7 @@ class MediaController extends Controller
         try {
             if ($request->hasFile('media') && $request->file('media')->isValid()) {
                 $newMedia = $request->file('media');
-                $newPath = $newMedia->store('images');
+                $newPath = $newMedia->store('public/images');
                 $newSize = $newMedia->getSize();
                 $newAlt = fake()->words(3, true);
 

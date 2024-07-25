@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 use App\Models\Media;
@@ -40,8 +41,9 @@ class LodgingController extends Controller
     public function adminCreate(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $lodgingTypes = LodgingType::all();
+        $cities = City::all();
 
-        return view('lodging.adminCreate', compact('lodgingTypes'));
+        return view('lodging.adminCreate', compact('lodgingTypes', ['cities']));
     }
 
     public function adminStore(Request $request): RedirectResponse
@@ -53,6 +55,60 @@ class LodgingController extends Controller
         }
         $lodging->save();
 
+        $this->uploadLodgingMedia($request, $lodging);
+
+        return redirect()->route('admin_lodging_show', $lodging)->with('success', 'Lodging created successfully.');
+    }
+
+    public function adminShow(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('lodging.adminShow', compact('lodging'));
+    }
+
+    public function show(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('lodging.show', compact('lodging'));
+    }
+
+    public function adminEdit(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        $lodgingTypes = LodgingType::all();
+        $cities = City::all();
+
+        return view('lodging.adminEdit', compact('lodging', ['lodgingTypes', 'cities']));
+    }
+
+    public function adminUpdate(Request $request, Lodging $lodging): RedirectResponse
+    {
+        $validated = $request->validate($this->model::getPropertyFormValidation());
+
+        $lodging->update($validated);
+
+        $this->uploadLodgingMedia($request, $lodging);
+
+        return redirect()->route('admin_lodging_show', $lodging)->with('success', 'Lodging updated successfully.');
+    }
+
+    public function adminDestroy(Lodging $lodging): RedirectResponse
+    {
+        $lodging->delete();
+        return redirect()->route('admin_lodging_index')->with('success', 'Lodging deleted successfully.');
+    }
+
+    private function getModel(): string
+    {
+        $reflection = new ReflectionClass($this);
+        $attribute = $reflection->getAttributes()[0];
+        return $attribute->getArguments()['model'];
+    }
+
+    /**
+     * @param Request $request
+     * @param Lodging $lodging
+     * @return void
+     */
+    private function uploadLodgingMedia(Request $request, Lodging $lodging): void
+    {
         if ($request->hasFile('medias')) {
             $uploadedMedias = $request->file('medias');
 
@@ -72,46 +128,6 @@ class LodgingController extends Controller
                 }
             }
         }
-
-        return redirect()->route('admin_lodging_show', $lodging)->with('success', 'Lodging created successfully.');
-    }
-
-    public function adminShow(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
-    {
-        return view('lodging.adminShow', compact('lodging'));
-    }
-
-    public function show(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
-    {
-        return view('lodging.show', compact('lodging'));
-    }
-
-    public function adminEdit(Lodging $lodging): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
-    {
-        $lodgingTypes = LodgingType::all();
-
-        return view('lodging.adminEdit', compact('lodging', ['lodgingTypes']));
-    }
-
-    public function adminUpdate(Request $request, Lodging $lodging): RedirectResponse
-    {
-        $validated = $request->validate($this->model::getPropertyFormValidation());
-
-        $lodging->update($validated);
-        return redirect()->route('admin_lodging_index')->with('success', 'Lodging updated successfully.');
-    }
-
-    public function adminDestroy(Lodging $lodging): RedirectResponse
-    {
-        $lodging->delete();
-        return redirect()->route('admin_lodging_index')->with('success', 'Lodging deleted successfully.');
-    }
-
-    private function getModel(): string
-    {
-        $reflection = new ReflectionClass($this);
-        $attribute = $reflection->getAttributes()[0];
-        return $attribute->getArguments()['model'];
     }
 }
 

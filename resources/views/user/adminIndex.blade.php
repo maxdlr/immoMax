@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - User list')
 
 @section('content')
 

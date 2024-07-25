@@ -60,13 +60,15 @@
                 @endif
             @endforeach
             <td class="d-flex justify-content-center align-items-center py-4">
-                @include('shared/_button',[
+                @if(@isset($showRoute))
+                    @include('shared/_button',[
                     'route' => route($showRoute, $item),
                     'label' => 'view',
                     'colorClass' => 'primary',
                     'iconClass' => 'eye',
                     'size' => 'sm'
                 ])
+                @endif
                 @include('shared/_button',[
                     'route' => route($editRoute, $item),
                     'label' => 'edit',

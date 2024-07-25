@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Lodging List')
 
 @section('content')
     <section class="container-fluid mt-4">
