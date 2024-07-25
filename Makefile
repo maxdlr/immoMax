@@ -8,6 +8,7 @@ run: ## Start Project
 	clear && \
 	php artisan storage:unlink && \
 	php artisan storage:link && \
+	npm run build && \
 	make work
 
 work: ## Launch server and start working
