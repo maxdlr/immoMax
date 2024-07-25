@@ -6,6 +6,8 @@ run: ## Start Project
 	clear && \
 	make db && \
 	clear && \
+	php artisan storage:unlink && \
+	php artisan storage:link && \
 	make work
 
 work: ## Launch server and start working

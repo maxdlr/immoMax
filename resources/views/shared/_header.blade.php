@@ -1,4 +1,4 @@
-<header class="rounded-4 overflow-hidden my-5">
+<header class="rounded-4 overflow-hidden mt-5">
     <div class="bg-image text-white rounded-4 overflow-hidden"
          style="
      background-image: url({{ $imgUrl ?? 'https://via.placeholder.com/1200x400' }});

@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Lodging;
 use App\Models\LodgingType;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class LodgingTypeSeeder extends Seeder
 {

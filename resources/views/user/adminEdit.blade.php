@@ -1,6 +1,7 @@
-@extends('app')
+@extends('admin/admin-base')
+@section('title', 'Admin - User Edit')
 
-@section('app_content')
+@section('content')
     <h1 class="mb-4">Edit User</h1>
     <form action="{{ route('admin_user_update', $user) }}" method="POST">
         @csrf
@@ -17,6 +18,12 @@
                         'label' => 'save',
                         'colorClass' => 'primary',
                         'iconClass' => 'floppy-fill'
+                    ])
+        @include('shared/_button', [
+                        'route' => route('admin_user_index'),
+                        'label' => 'Back to list',
+                        'colorClass' => 'secondary',
+                        'iconClass' => 'arrow-left'
                     ])
     </form>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 use App\Models\Media;
+use App\Models\TransactionType;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,12 +18,14 @@ class HomeController
         $lodgings = Lodging::all();
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
+        $transactionTypes = TransactionType::all();
         $headerMedia = Media::where('type', null)->get()->first();
 
         return view('home/index', [
             'lodgings' => $lodgings,
             'lodgingTypes' => $lodgingTypes,
             'cities' => $cities,
+            'transactionTypes' => $transactionTypes,
             'headerMedia' => $headerMedia
         ]);
     }
@@ -31,6 +34,7 @@ class HomeController
     {
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
+        $transactionTypes = TransactionType::all();
         $headerMedia = Media::where('type', null)->get()->first();
 
         $inputs = array_diff_key($request->input(), ['_token' => '']);
@@ -64,6 +68,7 @@ class HomeController
             'lodgings' => $lodgings,
             'lodgingTypes' => $lodgingTypes,
             'cities' => $cities,
+            'transactionTypes' => $transactionTypes,
             'headerMedia' => $headerMedia,
             'currentFilters' => $filterObjects,
             'isFiltered' => in_array(true, $isFilteredVoter)

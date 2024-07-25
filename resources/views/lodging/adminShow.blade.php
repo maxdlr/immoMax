@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - ' . $lodging->title)
 
 @section('content')
     <div class="container mt-5">
@@ -6,14 +7,11 @@
         <div class="card">
             <div class="card-body">
                 @if($lodging->media->isNotEmpty())
-                    <img src="{{ $lodging->media->first()->path }}" alt="{{ $lodging->media->first()->alt }}"
-                         class="card-img-top mb-3 rounded-4">
                     <div
-                        class="overflow-x-scroll"
-                        style="white-space: nowrap;"
+                        class="d-flex justify-content-start align-items-center flex-wrap"
                     >
                         @foreach($lodging->media as $media)
-                            <div class="d-inline position-relative">
+                            <div class="position-relative p-1">
                                 <img src="{{ $media->path }}" class="img-fluid rounded-4" alt="{{ $media->alt }}"
                                      style="max-width: 320px !important; height: auto !important;">
                                 <div class="position-absolute top-0 start-0 m-2">
@@ -33,10 +31,38 @@
                         @endforeach
                     </div>
                 @endif
-                <p class="card-text">{{ $lodging->description }}</p>
-                <p class="card-text"><strong>Room Count:</strong> {{ $lodging->roomCount }}</p>
-                <p class="card-text"><strong>Surface:</strong> {{ $lodging->surface }} m²</p>
-                <p class="card-text"><strong>Price:</strong> ${{ $lodging->price }}</p>
+                <p class="card-text py-3 lead">{{ $lodging->description }}</p>
+
+                <ul class="list-group w-50 mx-auto mb-4">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-house-door"></i> Rooms
+                        <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->roomCount }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-rulers"></i> Surface
+                        <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->surface }} m²</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-currency-dollar"></i> Price
+                        <span class="badge fs-6 bg-primary rounded-pill">${{ $lodging->price }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-tag-fill"></i> Type
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->lodgingType()->get()->first()->name }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-bag"></i> Transaction Type
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->transactionType()->get()->first()->name }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <i class="bi bi-geo-alt-fill"></i> City
+                        <span
+                            class="badge fs-6 bg-primary rounded-pill">{{ $lodging->city()->get()->first()->name }}</span>
+                    </li>
+                </ul>
+
 
                 @include('shared/_button',
                     [
@@ -63,6 +89,14 @@
                     'colorClass' => 'secondary',
                     'label' => 'Back to list',
                     'iconClass' => 'arrow-left'
+                ])
+
+                @include('shared/_button',
+                [
+                    'route' => route('lodging_show', $lodging),
+                    'colorClass' => 'outline-secondary',
+                    'label' => 'See as client',
+                    'iconClass' => 'eye'
                 ])
 
             </div>

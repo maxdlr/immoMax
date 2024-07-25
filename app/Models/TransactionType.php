@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class City extends Model
+class TransactionType extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class City extends Model
 
     public static function migrate(): void
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('transaction_types', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->nullable(false);
             $table->timestamps();

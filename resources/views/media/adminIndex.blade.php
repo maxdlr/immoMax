@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Media list')
 
 @section('content')
     <section class="container-fluid mt-4">

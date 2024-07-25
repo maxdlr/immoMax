@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Create Lodging')
 
 @section('content')
     <div class="container mt-5">
@@ -30,6 +31,22 @@
                 <select class="form-select" id="lodging_type_id" name="lodging_type_id" required>
                     @foreach($lodgingTypes as $lodgingType)
                         <option value="{{ $lodgingType->id }}">{{ $lodgingType->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="city_id" class="form-label">City</label>
+                <select class="form-select" id="city_id" name="city_id" required>
+                    @foreach($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="transaction_type_id" class="form-label">City</label>
+                <select class="form-select" id="transaction_type_id" name="transaction_type_id" required>
+                    @foreach($transactionTypes as $transactionType)
+                        <option value="{{ $transactionType->id }}">{{ $transactionType->name }}</option>
                     @endforeach
                 </select>
             </div>

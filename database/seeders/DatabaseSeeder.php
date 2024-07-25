@@ -8,6 +8,7 @@ use App\Models\LodgingType;
 
 use App\Models\Media;
 use App\Models\Role;
+use App\Models\TransactionType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,9 @@ class DatabaseSeeder extends Seeder
         City::factory()->create(['name' => 'MARSEILLE']);
         City::factory()->create(['name' => 'NANTES']);
 
+        TransactionType::factory()->create(['name' => 'SELL']);
+        TransactionType::factory()->create(['name' => 'RENT']);
+
         Role::factory()->create(['name' => 'ADMIN']);
         Role::factory()->create(['name' => 'USER']);
 
@@ -46,5 +50,10 @@ class DatabaseSeeder extends Seeder
             ->hasAttached($lodgings)
             ->hasAttached(Role::where(['name' => 'ADMIN'])->get())
             ->create(['name' => 'maxdlr', 'email' => 'contact@maxdlr.com']);
+
+        User::factory()
+            ->hasAttached($lodgings)
+            ->hasAttached(Role::where(['name' => 'ADMIN'])->get())
+            ->create(['name' => 'prof', 'email' => 'prof@prof.prof']);
     }
 }

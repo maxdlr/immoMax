@@ -27,6 +27,7 @@ class Lodging extends Model
             $table->float('price', 2)->nullable(false);
             $table->foreignId('lodging_type_id');
             $table->foreignId('city_id');
+            $table->foreignId('transaction_type_id');
             $table->timestamps();
         });
     }
@@ -40,20 +41,22 @@ class Lodging extends Model
             'surface',
             'price',
             'lodging_type_id',
-            'city_id'
+            'city_id',
+            'transaction_type_id',
         ];
     }
 
     public static function getPropertyFormValidation(): array
     {
         return [
-            'title' => 'required|string|max:100',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
             'roomCount' => 'required|integer',
             'surface' => 'required|integer',
             'price' => 'required|numeric',
             'lodging_type_id' => 'required|exists:lodging_types,id',
             'city_id' => 'required|exists:cities,id',
+            'transaction_type_id' => 'required|exists:transaction_types,id',
         ];
     }
 
@@ -70,6 +73,11 @@ class Lodging extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function transactionType(): BelongsTo
+    {
+        return $this->belongsTo(TransactionType::class);
     }
 
     public function users(): BelongsToMany

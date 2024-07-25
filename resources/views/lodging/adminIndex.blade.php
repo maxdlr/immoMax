@@ -1,4 +1,5 @@
 @extends('admin/admin-base')
+@section('title', 'Admin - Lodging List')
 
 @section('content')
     <section class="container-fluid mt-4">
@@ -13,7 +14,8 @@
                 'roomCount',
                 'surface',
                 'price',
-                'lodgingType'
+                'lodgingType',
+                'city'
             ],
         'newRoute' => 'admin_lodging_create',
         'showRoute' => 'admin_lodging_show',
