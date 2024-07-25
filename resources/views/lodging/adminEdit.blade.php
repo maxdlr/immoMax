@@ -56,7 +56,7 @@
             </div>
             @include('shared/_upload-input')
         </form>
-            
+
         @if($lodging->media->isNotEmpty())
             <div
                 class="d-flex justify-content-start align-items-center flex-wrap"
@@ -84,6 +84,7 @@
                 @endforeach
             </div>
         @endif
+
         @include('shared/_button', [
                         'form' => 'editLodging',
                         'label' => 'save',

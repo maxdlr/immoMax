@@ -14,7 +14,8 @@
                 'roomCount',
                 'surface',
                 'price',
-                'lodgingType'
+                'lodgingType',
+                'city'
             ],
         'newRoute' => 'admin_lodging_create',
         'showRoute' => 'admin_lodging_show',
