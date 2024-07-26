@@ -1,1 +1,11 @@
-A rendre pour le derniers cours le 26 Juillet 2024
+### Launch Project
+
+```bash
+make run
+```
+
+### Reload database
+
+```bash
+make db
+```

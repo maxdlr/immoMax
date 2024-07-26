@@ -1,4 +1,5 @@
 default: help
+include .env
 
 run: ## Start Project
 	@make composer-install && \
@@ -6,8 +7,7 @@ run: ## Start Project
 	clear && \
 	make db && \
 	clear && \
-	php artisan storage:unlink && \
-	php artisan storage:link && \
+	make reload-storage-link && \
 	npm run build && \
 	clear && \
 	make work
@@ -25,8 +25,16 @@ composer-install: ## Install composer dependencies
 npm-install: ## Install npm packages
 	@npm install
 
+reload-storage-link: ## delete and create storage:link
+	@php artisan storage:unlink && \
+    php artisan storage:link
+
+db-create: ## Create database if it doesn't exist
+	@dotenv -e .env -- mysql -u $(DB_USERNAME) -p"$(DB_PASSWORD)" -h $(DB_HOST) -P $(DB_PORT) < create-database.sql
+
 db: ## Reload database and fixtures
-	@make db-wipe && \
+	@make db-create && \
+	make db-wipe && \
 	make db-migrate && \
 	make db-seed
 
