@@ -14,26 +14,28 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    public const array LODGING_TYPES = ['T1', 'T2', 'T3', 'T4'];
+    public const array TRANSACTION_TYPES = ['SELL', 'RENT'];
+    public const array ROLES = ['ADMIN', 'USER'];
+    public const array CITIES = ['PARIS', 'LYON', 'MARSEILLE', 'NANTES', 'ANNECY', 'PAU', 'BORDEAUX', 'ORLEANS'];
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        LodgingType::factory()->create(['name' => 'T1']);
-        LodgingType::factory()->create(['name' => 'T2']);
-        LodgingType::factory()->create(['name' => 'T3']);
-        LodgingType::factory()->create(['name' => 'T4']);
-
-        City::factory()->create(['name' => 'PARIS']);
-        City::factory()->create(['name' => 'LYON']);
-        City::factory()->create(['name' => 'MARSEILLE']);
-        City::factory()->create(['name' => 'NANTES']);
-
-        TransactionType::factory()->create(['name' => 'SELL']);
-        TransactionType::factory()->create(['name' => 'RENT']);
-
-        Role::factory()->create(['name' => 'ADMIN']);
-        Role::factory()->create(['name' => 'USER']);
+        foreach (self::LODGING_TYPES as $name) {
+            LodgingType::factory()->create(['name' => $name]);
+        }
+        foreach (self::TRANSACTION_TYPES as $name) {
+            TransactionType::factory()->create(['name' => $name]);
+        }
+        foreach (self::ROLES as $name) {
+            Role::factory()->create(['name' => $name]);
+        }
+        foreach (self::CITIES as $name) {
+            City::factory()->create(['name' => $name]);
+        }
 
         Media::factory()->create(['type' => null]);
 

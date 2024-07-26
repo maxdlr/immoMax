@@ -7,6 +7,7 @@
             <div class="col-12 text-center">
                 <h1 class="display-4">{{ $user->name }}</h1>
                 <p class="lead">{{ $user->email }}</p>
+                <p class="lead">{{ $user->roles()->get()->first()->name }}</p>
             </div>
         </div>
         <div class="row justify-content-center mt-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lodging;
+use App\Models\Role;
 use App\Models\User;
 use App\Service\ControllerSettings;
 use Auth;
@@ -24,7 +25,7 @@ class UserController extends Controller
 
     public function adminIndex(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -34,7 +35,7 @@ class UserController extends Controller
 
     public function adminCreate(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -43,7 +44,7 @@ class UserController extends Controller
 
     public function adminStore(Request $request): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -58,7 +59,7 @@ class UserController extends Controller
 
     public function adminShow(User $user): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -67,31 +68,37 @@ class UserController extends Controller
 
     public function adminEdit(User $user): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
-        return view('user.adminEdit', compact('user'));
+        $roles = Role::all();
+
+        return view('user.adminEdit', compact('user', ['roles']));
     }
 
     public function adminUpdate(Request $request, User $user): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
+
+        $inputRole = $request->input('role');
 
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|string|max:100',
         ]);
 
+        $user->roles()->detach(Role::where('id', '!=', $inputRole)->get());
+        $user->roles()->attach(Role::where(['id' => $inputRole])->get());
         $user->update($validated);
-        return redirect()->route('admin_user_index')->with('success', 'User updated successfully.');
+        return redirect()->route('admin_user_show', $user)->with('success', 'User updated successfully.');
     }
 
     public function adminDestroy(User $user): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 

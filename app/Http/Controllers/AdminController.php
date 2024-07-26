@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function dashboard(): View|RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
         $lodgings = Lodging::all();
