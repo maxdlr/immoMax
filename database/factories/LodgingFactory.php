@@ -24,9 +24,9 @@ class LodgingFactory extends Factory
     {
         $description = '';
         for ($i = 0; $i < 30; $i++) {
-            $description .= $this->faker->randomElement(LodgingDescriptionEnum::cases())->value;
+            $description .= $this->faker->randomElement(LodgingDescriptionEnum::cases())->value . ' ';
         }
-        
+
         return [
             'title' => $this->faker->randomElement(LodgingTitleEnum::cases())->value,
             'description' => $description,

@@ -25,7 +25,7 @@ class MediaController extends Controller
 
     public function adminIndex(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -35,7 +35,7 @@ class MediaController extends Controller
 
     public function adminCreate(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -46,7 +46,7 @@ class MediaController extends Controller
 
     public function adminStore(Request $request): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -69,7 +69,7 @@ class MediaController extends Controller
 
     public function adminShow(Media $media): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -78,7 +78,7 @@ class MediaController extends Controller
 
     public function adminEdit(Media $media): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -87,7 +87,7 @@ class MediaController extends Controller
 
     public function adminUpdate(Request $request, Media $media): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -112,7 +112,7 @@ class MediaController extends Controller
 
     public function adminDestroy(Media $media, Request $request): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 

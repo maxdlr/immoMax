@@ -20,8 +20,23 @@
         >
             @foreach($lodging->media as $media)
                 <div class="d-inline px-2">
-                    <img src="{{ $media->path }}" class="img-fluid rounded-4" alt="{{ $media->alt }}"
-                         style="max-width: 320px !important; height: auto !important;">
+                    <!-- Image -->
+                    <img src="{{ $media->path }}" class="img-fluid rounded-4" role="button" alt="{{ $media->alt }}"
+                         style="max-width: 320px !important; height: auto !important;"
+                         data-bs-toggle="modal" data-bs-target="#imageModal{{ $media->id }}">
+
+                    <!-- Modal -->
+                    <div class="modal modal-lg fade" id="imageModal{{ $media->id }}"
+                         tabindex="-1"
+                         aria-labelledby="imageModalLabel{{ $media->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content rounded-5 overflow-hidden p-0">
+                                <div class="modal-body text-center p-0">
+                                    <img src="{{ $media->path }}" class="img-fluid" alt="{{ $media->alt }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -54,8 +69,8 @@
                         $firstCol = Str::words($lodging->description, Number::format($wordCount / 2, 0), '');
                         $secondCol = Str::of($lodging->description)->remove($firstCol);
                     @endphp
-                    <p class="fs-4">{{ $firstCol }}</p>
-                    <p class="fs-4">{{ $secondCol }}</p>
+                    <p class="fs-6">{{ $firstCol }}</p>
+                    <p class="fs-6">{{ $secondCol }}</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -69,8 +84,8 @@
                         <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->surface }} m²</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <i class="bi bi-currency-dollar"></i> Price
-                        <span class="badge fs-6 bg-primary rounded-pill">${{ $lodging->price }}</span>
+                        <i class="bi bi-currency-euro"></i> Price
+                        <span class="badge fs-6 bg-primary rounded-pill">{{ $lodging->price }} €</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <i class="bi bi-tag-fill"></i> Type

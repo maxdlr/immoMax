@@ -1,8 +1,8 @@
 @php use Illuminate\Support\Str; @endphp
 
-<div class="row mt-5">
+<div class="row mt-5 row-cols-md-1 row-cols-lg-2 row-cols-xxl-3">
     @foreach($lodgings as $lodging)
-        <div class="col-md-4 mb-4">
+        <div class="mb-4">
             <div class="card h-100 rounded-5 overflow-hidden">
                 <div class="position-relative">
                     <img src="{{ $lodging->media->first()->path }}" class="card-img-top"
@@ -36,7 +36,7 @@
                                 <i class="bi bi-rulers"></i> Surface: {{ $lodging->surface }} m²
                             </li>
                             <li class="list-group-item">
-                                <i class="bi bi-currency-dollar"></i> Price: ${{ $lodging->price }}
+                                <i class="bi bi-currency-euro"></i> Price: {{ $lodging->price }} €
                             </li>
                         </ul>
                         <ul class="list-group list-group-flush">

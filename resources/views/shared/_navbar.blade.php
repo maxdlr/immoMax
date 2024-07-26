@@ -1,14 +1,14 @@
 @php
     $links = [];
 
-    if (Auth::user()?->roles()->get()->first()->name === 'ADMIN') {
+    if (Auth::check() && Auth::user()?->roles()?->get()->first()?->name === 'ADMIN') {
         $links[] = [
             'link' => route('admin_dashboard'),
             'label' => 'Admin'
          ];
     }
 
-    if (Auth::user() !== null) {
+    if (Auth::check()) {
         $links[] = [
             'link' => route('dashboard'),
             'label' => 'My dashboard'
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    @if(Auth::user() !== null)
+    @if(Auth::check())
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">

@@ -34,7 +34,7 @@ class LodgingController extends Controller
 
     public function adminIndex(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
         $lodgings = $this->model::all();
@@ -43,7 +43,7 @@ class LodgingController extends Controller
 
     public function adminCreate(): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -56,7 +56,7 @@ class LodgingController extends Controller
 
     public function adminStore(Request $request): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -74,7 +74,7 @@ class LodgingController extends Controller
 
     public function adminShow(Lodging $lodging): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -88,7 +88,7 @@ class LodgingController extends Controller
 
     public function adminEdit(Lodging $lodging): RedirectResponse|View
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -101,7 +101,7 @@ class LodgingController extends Controller
 
     public function adminUpdate(Request $request, Lodging $lodging): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
@@ -116,11 +116,11 @@ class LodgingController extends Controller
 
     public function adminDestroy(Lodging $lodging): RedirectResponse
     {
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 
-        if (Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
+        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
 

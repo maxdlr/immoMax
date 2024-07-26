@@ -14,6 +14,17 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
         </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" id="role" name="role" required>
+                @foreach($roles as $role)
+                    <option
+                        value="{{ $role->id }}" {{ $role->id == $user->roles()->get()->first()->id ? 'selected' : '' }}>
+                        {{ $role->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         @include('shared/_button', [
                         'label' => 'save',
                         'colorClass' => 'primary',
