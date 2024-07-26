@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Lodging;
 use App\Models\LodgingType;
 use App\Models\Media;
+use App\Models\TransactionType;
 use App\Service\ControllerSettings;
 use Auth;
 use Illuminate\Contracts\View\Factory;
@@ -49,7 +50,7 @@ class LodgingController extends Controller
 
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
-        $transactionTypes = City::all();
+        $transactionTypes = TransactionType::all();
 
         return view('lodging.adminCreate', compact('lodgingTypes', ['cities', 'transactionTypes']));
     }
@@ -94,7 +95,7 @@ class LodgingController extends Controller
 
         $lodgingTypes = LodgingType::all();
         $cities = City::all();
-        $transactionTypes = City::all();
+        $transactionTypes = TransactionType::all();
 
         return view('lodging.adminEdit', compact('lodging', ['lodgingTypes', 'cities', 'transactionTypes']));
     }
@@ -116,10 +117,6 @@ class LodgingController extends Controller
 
     public function adminDestroy(Lodging $lodging): RedirectResponse
     {
-        if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
-            return redirect()->route('app_home')->with('error', "Can't go there, admins only");
-        }
-
         if (!Auth::check() || Auth::user()->roles()->get()->first()->name !== 'ADMIN') {
             return redirect()->route('app_home')->with('error', "Can't go there, admins only");
         }
